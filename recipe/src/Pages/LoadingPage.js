@@ -40,9 +40,9 @@ function LoadingPage() {
 
 		createUserWithEmailAndPassword(auth, email, password)
 			.then((userCrendential) => {
-				return updateProfile(userCrendential.user, {
-					displayName: firstname,
-				});
+				// return updateProfile(userCrendential.user, {
+				// 	displayName: firstname,
+				// });
 			})
 			.catch((error) => {
 				alert(error.message);

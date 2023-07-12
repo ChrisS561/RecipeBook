@@ -11,11 +11,11 @@ import { useNavigate } from 'react-router';
 
 export const NavigationBar = () => {
 	const [scrolled, setScrolled] = useState(false);
-	const [user, setUser] = useState(undefined); 
+	const [user, setUser] = useState(undefined);
 	const navigate = useNavigate();
-	const currentuser = auth.currentUser; 
-	const displayName = currentuser.displayName
-	const email = currentuser.email
+	// const currentuser = auth.currentUser;
+	// const displayName = currentuser.displayName
+	// const email = currentuser.email
 
 	useEffect(() => {
 		const onScroll = () => {
@@ -30,13 +30,18 @@ export const NavigationBar = () => {
 
 		return () => window.removeEventListener('scroll', onScroll);
 	}, []);
-onAuthStateChanged(auth, (currentUser) => {
-	if (currentUser){
-		setUser(currentUser);
-	} else {
-		navigate("/signup")
-	}
-});
+
+
+	useEffect(() => {
+		onAuthStateChanged(auth, (currentUser) => {
+			if (currentUser) {
+				setUser(currentUser);
+			} else {
+				navigate('/signup');
+			}
+		});
+	}, []);
+
 	return (
 		<>
 			<Navbar
@@ -60,10 +65,10 @@ onAuthStateChanged(auth, (currentUser) => {
 								color: 'white',
 								marginRight: '10px',
 								fontWeight: 'bold',
-								marginTop: "8px",
+								marginTop: '8px',
 							}}
 						>
-							Welcome, {email}
+							Welcome, {user?.email}
 						</Nav>
 						<Dropdown align="end">
 							<Dropdown.Toggle
@@ -86,7 +91,9 @@ onAuthStateChanged(auth, (currentUser) => {
 							</Dropdown.Toggle>
 							<Dropdown.Menu>
 								<Dropdown.Item href="/profile">Profile</Dropdown.Item>
-								<Dropdown.Item onClick={()=> signOut(auth)}>Sign Out</Dropdown.Item>
+								<Dropdown.Item onClick={() => signOut(auth)}>
+									Sign Out
+								</Dropdown.Item>
 							</Dropdown.Menu>
 						</Dropdown>
 					</Nav>
