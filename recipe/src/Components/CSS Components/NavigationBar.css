@@ -1,8 +1,4 @@
-.logo {
-  /* logo */
-  display: flex;
-  align-items: center;
-}
+
 .title {
   /* concept */
   font-size: 40px;
@@ -17,7 +13,4 @@ nav.navbar {
   z-index: 9999;
   transition: 0.32s ease-in-out;
 }
-nav.navbar.scrolled {
-  padding: 0px 0;
-  background-color: #121212;
-}
+

@@ -1,63 +1,25 @@
-import { Container, Row, Col } from "react-bootstrap";
-import bannerBg from "../Image/banner-bg.jpg";
-import "./CSS Components/Banner.css";
-import React, { useState, useRef, useEffect } from "react";
-import "animate.css";
-import TrackVisibility from "react-on-screen";
+import React, { useState } from 'react';
+import { Container } from 'react-bootstrap';
+import bannerBg from '../Image/banner-bg.jpg';
+import './CSS Components/Banner.css';
+import IngredientsForm from './IngredientsForm';
 
 const Banner = () => {
-  const [scrolled, setScrolled] = useState(false);
+	return (
+		<div className="banner">
+			<img className="scrolled-banner" alt="bg-banner" src={bannerBg} />
 
-  useEffect(() => {
-    const onScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-
-    window.addEventListener("scroll", onScroll);
-
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  return (
-    <TrackVisibility>
-      <div className="banner">
-        <img
-          className={!scrolled ? "scrolled-banner" : ""}
-          alt="bg-banner"
-          src={bannerBg}
-        ></img>
-        <div className="overlay">
-          <Container
-            className="overlay-container"
-            style={{
-              position: "absolute",
-              top: "50%",
-              transform: "translate(0px, -50%)",
-              height: "300px",
-              borderRadius: "35px",
-            }}
-          >
-            <div className="overlay-text">
-              <h1
-                className="animate__animated animate__bounce"
-                style={{
-                  margin: "0",
-                  inset: "0",
-                  padding: "100px 0",
-                  fontWeight: "bold",
-                }}
-              >
-                Welcome to RecipeBank!
-              </h1>
-            </div>
-          </Container>
-        </div>
-      </div>
-    </TrackVisibility>
-  );
+			<div className="overlay">
+				<div className="welcome-message">
+					<Container className='container'>
+						<h1>Welcome to Our Recipe Search!</h1>
+						<p>Enter the ingredients you want to search for:</p>
+					</Container>
+					<IngredientsForm />
+				</div>
+			</div>
+		</div>
+	);
 };
+
 export default Banner;

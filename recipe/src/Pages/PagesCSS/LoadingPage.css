@@ -1,0 +1,14 @@
+.custom-link{
+    color: red;
+}
+
+/* CSS */
+.custom-checkbox .form-check-input:checked {
+    background-color: red;
+    /* Change the background color when checked */
+}
+
+.custom-checkbox .form-check-input:not(:checked) {
+    background-color: blue;
+    /* Change the background color when unchecked */
+}

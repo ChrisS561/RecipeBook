@@ -1,31 +1,48 @@
+.banner {
+  position: relative;
+  height: 1000px;
+}
+
 .banner img {
   width: 100%;
-  height: 1000px;
-  position: relative;
-  align-items: center;
+  height: 100%;
+  position: absolute;
   filter: blur(8px);
 }
+
 .banner .overlay {
   position: absolute;
   inset: 0;
-  font-weight: bold;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  font-size: 100px;
+  justify-content: flex-start;
+  margin-top: 6%;
 }
-.invis-overlay-container {
-  background-color: #121212;
+
+.welcome-message {
   text-align: center;
-  inset: 0;
+  justify-content: flex-start;
+  color: #fff;
 }
-.overlay-container {
-  background-color: #121212;
-  text-align: center;
-  inset: 0;
+
+.welcome-message h1 {
+  font-size: 50px;
+  
 }
-.overlay-text h1 {
-  font-size: 70px;
+
+.welcome-message p {
+  font-size: 25px;
 }
-.scrolled-banner {
-  filter: blur(8px);
+
+.container{
+
+      max-width: 500px;
+      max-height: 200px;
+      border-radius: 10px;
+      background-color: #653030;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    
 }
