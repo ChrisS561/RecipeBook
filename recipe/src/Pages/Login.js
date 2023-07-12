@@ -9,10 +9,14 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import image from '../Image/banner-bg.jpg';
 import './PagesCSS/Login.css';
+import { onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../Firebase/Firebase';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
 	const [data, setData] = useState({ username: '', password: '' });
 	const { username, password } = data;
+	const navigate = useNavigate();
 
 	const loginHandler = (event) => {
 		setData({ ...data, [event.target.name]: event.target.value });
@@ -20,9 +24,22 @@ function Login() {
 
 	const submitHandler = (event) => {
 		event.preventDefault();
+		signInWithEmailAndPassword(auth, username, password)
+			.then((userCrendential) => {
+				console.log(userCrendential);
+			})
+			.catch((error) => {
+				alert(error.message);
+			});
 		console.log(data);
 	};
-
+	onAuthStateChanged(auth, (user) => {
+		onAuthStateChanged(auth, (user) => {
+			if (user) {
+				navigate('/homepage');
+			}
+		});
+	});
 	return (
 		<div
 			style={{
@@ -123,7 +140,7 @@ function Login() {
 									<div className="d-flex justify-content-center">
 										<p className="ms-5">
 											Already have an account?{' '}
-											<a href="/" className="custom-link">
+											<a href="/signup" className="custom-link">
 												Sign up
 											</a>
 										</p>

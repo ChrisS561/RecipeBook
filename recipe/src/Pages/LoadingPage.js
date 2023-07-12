@@ -9,6 +9,14 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import image from '../Image/banner-bg.jpg';
 import './PagesCSS/LoadingPage.css';
+import {
+
+	createUserWithEmailAndPassword,
+	onAuthStateChanged,
+	updateProfile,
+} from 'firebase/auth';
+import { auth } from '../Firebase/Firebase';
+import { useNavigate } from 'react-router-dom';
 
 function LoadingPage() {
 	const [data, setData] = useState({
@@ -18,7 +26,10 @@ function LoadingPage() {
 		password: '',
 		confirmPassword: '',
 	});
+	const [error, setError] = useState(false);
+	const [currentUser, setCurrentUser] = useState();
 	const { firstname, lastname, email, password, confirmPassword } = data;
+	const navigate = useNavigate();
 
 	const signupHandler = (event) => {
 		setData({ ...data, [event.target.name]: event.target.value });
@@ -26,8 +37,26 @@ function LoadingPage() {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
+
+		createUserWithEmailAndPassword(auth, email, password)
+			.then((userCrendential) => {
+				return updateProfile(userCrendential.user, {
+					displayName: firstname,
+				});
+			})
+			.catch((error) => {
+				alert(error.message);
+			});
 		console.log(data);
 	};
+
+	onAuthStateChanged(auth, (user) => {
+		onAuthStateChanged(auth, (user) => {
+			if (user) {
+				navigate('/homepage');
+			}
+		});
+	});
 
 	return (
 		<div
@@ -133,6 +162,9 @@ function LoadingPage() {
 										value={confirmPassword}
 									/>
 								</Form.Group>
+								{error && (
+									<div style={{ color: 'red' }}>Password do not match</div>
+								)}
 								<div className="d-flex justify-content-center mb-4">
 									<Form.Check
 										id="flexCheckDefault"
@@ -151,7 +183,7 @@ function LoadingPage() {
 								<div className="d-flex justify-content-center">
 									<p className="ms-5">
 										Already have an account?{' '}
-										<a href="/login" className="custom-link">
+										<a href="/" className="custom-link">
 											Login Here
 										</a>
 									</p>

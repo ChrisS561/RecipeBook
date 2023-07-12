@@ -5,9 +5,17 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 import './CSS Components/NavigationBar.css';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { auth } from '../Firebase/Firebase';
+import { useNavigate } from 'react-router';
 
 export const NavigationBar = () => {
 	const [scrolled, setScrolled] = useState(false);
+	const [user, setUser] = useState(undefined); 
+	const navigate = useNavigate();
+	const currentuser = auth.currentUser; 
+	const displayName = currentuser.displayName
+	const email = currentuser.email
 
 	useEffect(() => {
 		const onScroll = () => {
@@ -22,7 +30,13 @@ export const NavigationBar = () => {
 
 		return () => window.removeEventListener('scroll', onScroll);
 	}, []);
-
+onAuthStateChanged(auth, (currentUser) => {
+	if (currentUser){
+		setUser(currentUser);
+	} else {
+		navigate("/signup")
+	}
+});
 	return (
 		<>
 			<Navbar
@@ -33,7 +47,7 @@ export const NavigationBar = () => {
 				sticky="top"
 				className={scrolled ? 'scrolled' : ''}
 			>
-				<Navbar.Brand href="/">
+				<Navbar.Brand href="/homepage">
 					<div className="logo">
 						<span className="title">RecipeBank</span>
 					</div>
@@ -41,13 +55,23 @@ export const NavigationBar = () => {
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav">
 					<Nav className="ms-auto">
+						<Nav
+							style={{
+								color: 'white',
+								marginRight: '10px',
+								fontWeight: 'bold',
+								marginTop: "8px",
+							}}
+						>
+							Welcome, {email}
+						</Nav>
 						<Dropdown align="end">
 							<Dropdown.Toggle
 								variant="light"
 								id="profile-dropdown"
 								style={{
 									// Updated inline styling for the profile circle
-									backgroundColor: '#fc4903',
+									backgroundColor: '#653030',
 									borderRadius: '50%',
 									width: '40px',
 									height: '40px',
@@ -55,14 +79,14 @@ export const NavigationBar = () => {
 									display: 'flex',
 									justifyContent: 'center',
 									alignItems: 'center',
-									marginRight: '20px', 
+									marginRight: '20px',
 								}}
 							>
 								<i className="fa fa-user" style={{ color: 'white' }} />
 							</Dropdown.Toggle>
 							<Dropdown.Menu>
 								<Dropdown.Item href="/profile">Profile</Dropdown.Item>
-								<Dropdown.Item href="/signout">Sign Out</Dropdown.Item>
+								<Dropdown.Item onClick={()=> signOut(auth)}>Sign Out</Dropdown.Item>
 							</Dropdown.Menu>
 						</Dropdown>
 					</Nav>
