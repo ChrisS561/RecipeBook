@@ -16,22 +16,19 @@ import { GoogleAuthProvider, FacebookAuthProvider } from 'firebase/auth';
 
 function Login() {
 	const [data, setData] = useState({ username: '', password: '' });
-	// const [user,setUser] =useState()
 	const { username, password } = data;
 	const navigate = useNavigate();
 
-	// const facebookSignIn = () => { 
-	// 	const provider = new FacebookAuthProvider()
-	// 	signInWithRedirect(auth,provider)
-	// }
+	const facebookSignIn = () => { 
+		const provider = new FacebookAuthProvider()
+		signInWithRedirect(auth,provider)
+	}
 	const handleFaceBookSignIn = async () => { 
-		const provider = new FacebookAuthProvider();
-		signInWithRedirect(auth,provider).then((result)=>{ 
-			console.log(result)
-			// setUser(result.user)
-		}).catch((error)=>{ 
+		try {
+			await facebookSignIn();
+		} catch (error) {
 			alert(error.message)
-		})
+		}
 	}
 
 	const googleSignIn = () => { 
