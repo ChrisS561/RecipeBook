@@ -21,7 +21,7 @@ function Login() {
 
 	const facebookSignIn = () => { 
 		const provider = new FacebookAuthProvider()
-		signInWithRedirect(auth,provider)
+		signInWithPopup(auth,provider)
 	}
 	const handleFaceBookSignIn = async () => { 
 		try {
@@ -33,12 +33,13 @@ function Login() {
 
 	const googleSignIn = () => { 
 		const provider = new GoogleAuthProvider(); 
-		signInWithRedirect(auth,provider)
+		signInWithPopup(auth,provider)
 	}
 
 	const handleGoogleSignIn = async () => { 
 		try {
 			await googleSignIn()
+			
 		} catch (error) {
 			alert(error.message)
 		}
