@@ -1,13 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-	faFacebookF,
-	faTwitter,
-	faGoogle,
-	faGithub,
-} from '@fortawesome/free-brands-svg-icons';
-import image from '../Image/banner-bg.jpg';
+import image from '../Image/background3.webp';
 import './PagesCSS/LoadingPage.css';
 import {
 	createUserWithEmailAndPassword,
@@ -25,8 +18,7 @@ function LoadingPage() {
 		password: '',
 		confirmPassword: '',
 	});
-	const [error, setError] = useState(false);
-	const [currentUser, setCurrentUser] = useState();
+
 	const { firstname, lastname, email, password, confirmPassword } = data;
 	const navigate = useNavigate();
 
@@ -163,9 +155,7 @@ function LoadingPage() {
 										value={confirmPassword}
 									/>
 								</Form.Group>
-								{error && (
-									<div style={{ color: 'red' }}>Password do not match</div>
-								)}
+
 								<div className="d-flex justify-content-center mb-4">
 									<Form.Check
 										id="flexCheckDefault"
@@ -189,7 +179,6 @@ function LoadingPage() {
 										</a>
 									</p>
 								</div>
-							
 							</Card.Body>
 						</Card>
 					</Col>

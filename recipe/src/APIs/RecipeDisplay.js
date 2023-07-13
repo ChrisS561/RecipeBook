@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card } from 'react-bootstrap';
+import {Card } from 'react-bootstrap';
 import './APICSS/RecipeDisplay.css';
 
 const RecipeDisplay = ({ data }) => {

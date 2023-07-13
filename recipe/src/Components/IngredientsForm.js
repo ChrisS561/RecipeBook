@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import './CSSComponents/IngredientsForm.css';
-import WeatherComponent from '../APIs/Weather';
 import RecipeDisplay from '../APIs/RecipeDisplay';
 import { ingredientAtom } from '../atom';
 import { useRecoilState } from 'recoil';
 import axios from 'axios';
-import Footer from './Footer';
+
 
 /**
  * A form component for managing a list of ingredients.
@@ -14,7 +13,6 @@ import Footer from './Footer';
 export default function IngredientsForm() {
 	const [data, setData] = useState([]);
 	const [ingredients, setIngredients] = useRecoilState(ingredientAtom);
-	const [ recipes, setRecipes] = useState([]);
 
 
 	/**
@@ -70,8 +68,11 @@ export default function IngredientsForm() {
 			<div className="overlay-container">
 				<Container>
 					<div className="overlay-text">
-						<h1>Welcome to Our Recipe Search!</h1>
-						<p>Enter the ingredients you want to search for:</p>
+						<h1>Search Recipes by Ingredients!</h1>
+						<p>
+							Enter the ingredients you have, separated by commas. For example,
+							"tomatoes, onions, garlic".
+						</p>
 						<Form onSubmit={handleSubmit}>
 							<div className="input-container">
 								<div className="ingredient-item">
@@ -84,7 +85,7 @@ export default function IngredientsForm() {
 									/>
 								</div>
 								<div className="d-flex justify-content-center ">
-									<Button className="submit-button" size="md" type="submit">
+									<Button className="submit-button" size="md" type="submit" variant='success'>
 										Search
 									</Button>
 								</div>
