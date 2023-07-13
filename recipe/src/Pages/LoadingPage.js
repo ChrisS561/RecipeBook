@@ -10,7 +10,6 @@ import {
 import image from '../Image/banner-bg.jpg';
 import './PagesCSS/LoadingPage.css';
 import {
-
 	createUserWithEmailAndPassword,
 	onAuthStateChanged,
 	updateProfile,
@@ -34,28 +33,30 @@ function LoadingPage() {
 	const signupHandler = (event) => {
 		setData({ ...data, [event.target.name]: event.target.value });
 	};
-
 	const handleSubmit = (event) => {
 		event.preventDefault();
-
-		createUserWithEmailAndPassword(auth, email, password)
-			.then((userCrendential) => {
-				// return updateProfile(userCrendential.user, {
-				// 	displayName: firstname,
-				// });
-			})
-			.catch((error) => {
-				alert(error.message);
-			});
-		console.log(data);
+		if (data.password === data.confirmPassword) {
+			createUserWithEmailAndPassword(auth, email, password)
+				.then((userCrendential) => {
+					console.log(data);
+					return updateProfile(userCrendential.user, {
+						displayName: firstname,
+					});
+				})
+				.catch((error) => {
+					alert(error.message);
+				});
+		} else {
+			alert(
+				'The entered passwords do not match. Please make sure to enter the same password in both fields.'
+			);
+		}
 	};
 
 	onAuthStateChanged(auth, (user) => {
-		onAuthStateChanged(auth, (user) => {
-			if (user) {
-				navigate('/homepage');
-			}
-		});
+		if (user) {
+			navigate('/homepage');
+		}
 	});
 
 	return (

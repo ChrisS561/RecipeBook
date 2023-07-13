@@ -4,7 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Dropdown from 'react-bootstrap/Dropdown';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
-import './CSS Components/NavigationBar.css';
+import './CSSComponents/NavigationBar.css';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from '../Firebase/Firebase';
 import { useNavigate } from 'react-router';
@@ -13,9 +13,6 @@ export const NavigationBar = () => {
 	const [scrolled, setScrolled] = useState(false);
 	const [user, setUser] = useState(undefined);
 	const navigate = useNavigate();
-	// const currentuser = auth.currentUser;
-	// const displayName = currentuser.displayName
-	// const email = currentuser.email
 
 	useEffect(() => {
 		const onScroll = () => {
@@ -31,13 +28,12 @@ export const NavigationBar = () => {
 		return () => window.removeEventListener('scroll', onScroll);
 	}, []);
 
-
 	useEffect(() => {
 		onAuthStateChanged(auth, (currentUser) => {
 			if (currentUser) {
 				setUser(currentUser);
 			} else {
-				navigate('/signup');
+				navigate('/');
 			}
 		});
 	}, []);
@@ -68,7 +64,7 @@ export const NavigationBar = () => {
 								marginTop: '8px',
 							}}
 						>
-							Welcome, {user?.email}
+							Welcome, {user?.displayName}
 						</Nav>
 						<Dropdown align="end">
 							<Dropdown.Toggle

@@ -33,12 +33,11 @@ function Login() {
 			});
 		console.log(data);
 	};
+
 	onAuthStateChanged(auth, (user) => {
-		onAuthStateChanged(auth, (user) => {
-			if (user) {
-				navigate('/homepage');
-			}
-		});
+		if (user) {
+			navigate('/homepage');
+		}
 	});
 	return (
 		<div
