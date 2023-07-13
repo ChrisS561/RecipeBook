@@ -39,7 +39,7 @@ function Login() {
 	const handleGoogleSignIn = async () => { 
 		try {
 			await googleSignIn()
-			
+			navigate("/homepage")
 		} catch (error) {
 			alert(error.message)
 		}
