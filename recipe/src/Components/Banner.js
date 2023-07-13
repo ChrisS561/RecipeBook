@@ -5,6 +5,7 @@ import './CSSComponents/Banner.css';
 import IngredientsForm from './IngredientsForm';
 import WeatherComponent from '../APIs/Weather';
 import image from "../Image/banner-bg.jpg"
+import RecipeDisplay from '../APIs/RecipeDisplay';
 
 const Banner = () => {
 	return (
@@ -17,8 +18,9 @@ const Banner = () => {
 				minHeight: '100vh',
 			}}
 		>
-			{/* <img className="scrolled-banner" alt="bg-banner" src={bannerBg} /> */}
 			<IngredientsForm />
+			<WeatherComponent />
+			
 		</div>
 	);
 };

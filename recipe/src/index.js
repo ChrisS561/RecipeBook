@@ -7,7 +7,6 @@ import LoadingPage from './Pages/LoadingPage';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './Pages/Login';
 
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<Router>

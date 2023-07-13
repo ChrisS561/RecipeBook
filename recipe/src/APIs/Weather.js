@@ -51,7 +51,7 @@ export default function WeatherComponent() {
 		};
 
 		getLocation();
-	}, []);
+	}, [data]);
 
 	if (isLoading) {
 		return <div>Loading...</div>;

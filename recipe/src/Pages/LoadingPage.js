@@ -189,41 +189,7 @@ function LoadingPage() {
 										</a>
 									</p>
 								</div>
-								<div className="text-center">
-									<p>or sign up with:</p>
-									<Button
-										tag="a"
-										variant="none"
-										className="mx-3"
-										style={{ color: '#1266f1' }}
-									>
-										<FontAwesomeIcon icon={faFacebookF} size="sm" />
-									</Button>
-									<Button
-										tag="a"
-										variant="none"
-										className="mx-3"
-										style={{ color: '#1266f1' }}
-									>
-										<FontAwesomeIcon icon={faTwitter} size="sm" />
-									</Button>
-									<Button
-										tag="a"
-										variant="none"
-										className="mx-3"
-										style={{ color: '#1266f1' }}
-									>
-										<FontAwesomeIcon icon={faGoogle} size="sm" />
-									</Button>
-									<Button
-										tag="a"
-										variant="none"
-										className="mx-3"
-										style={{ color: '#1266f1' }}
-									>
-										<FontAwesomeIcon icon={faGithub} size="sm" />
-									</Button>
-								</div>
+							
 							</Card.Body>
 						</Card>
 					</Col>

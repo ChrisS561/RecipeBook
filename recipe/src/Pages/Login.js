@@ -9,14 +9,44 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import image from '../Image/banner-bg.jpg';
 import './PagesCSS/Login.css';
-import { onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
+import { onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect } from 'firebase/auth';
 import { auth } from '../Firebase/Firebase';
 import { useNavigate } from 'react-router-dom';
+import { GoogleAuthProvider, FacebookAuthProvider } from 'firebase/auth';
 
 function Login() {
 	const [data, setData] = useState({ username: '', password: '' });
+	// const [user,setUser] =useState()
 	const { username, password } = data;
 	const navigate = useNavigate();
+
+	// const facebookSignIn = () => { 
+	// 	const provider = new FacebookAuthProvider()
+	// 	signInWithRedirect(auth,provider)
+	// }
+	const handleFaceBookSignIn = async () => { 
+		const provider = new FacebookAuthProvider();
+		signInWithRedirect(auth,provider).then((result)=>{ 
+			console.log(result)
+			// setUser(result.user)
+		}).catch((error)=>{ 
+			alert(error.message)
+		})
+	}
+
+	const googleSignIn = () => { 
+		const provider = new GoogleAuthProvider(); 
+		signInWithRedirect(auth,provider)
+	}
+
+	const handleGoogleSignIn = async () => { 
+		try {
+			await googleSignIn()
+		} catch (error) {
+			alert(error.message)
+		}
+	}
+
 
 	const loginHandler = (event) => {
 		setData({ ...data, [event.target.name]: event.target.value });
@@ -109,6 +139,7 @@ function Login() {
 										variant="none"
 										className="mx-3"
 										style={{ color: '#1266f1' }}
+										onClick={handleFaceBookSignIn}
 									>
 										<FontAwesomeIcon icon={faFacebookF} size="sm" />
 									</Button>
@@ -125,6 +156,7 @@ function Login() {
 										variant="none"
 										className="mx-3"
 										style={{ color: '#1266f1' }}
+										onClick={handleGoogleSignIn}
 									>
 										<FontAwesomeIcon icon={faGoogle} size="sm" />
 									</Button>

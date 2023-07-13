@@ -2,12 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import './CSSComponents/IngredientsForm.css';
 import WeatherComponent from '../APIs/Weather';
+import RecipeDisplay from '../APIs/RecipeDisplay';
+import { ingredientAtom } from '../atom';
+import { useRecoilState } from 'recoil';
+import axios from 'axios';
 
 /**
  * A form component for managing a list of ingredients.
  */
 export default function IngredientsForm() {
-	const [ingredients, setIngredients] = useState([]);
+	const [data, setData] = useState([]);
+	const [ingredients, setIngredients] = useRecoilState(ingredientAtom);
 	const [newIngredient, setNewIngredient] = useState('');
 	const [newhidden, setNewHidden] = useState(false);
 

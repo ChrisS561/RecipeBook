@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -8,11 +9,17 @@ import './CSSComponents/NavigationBar.css';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from '../Firebase/Firebase';
 import { useNavigate } from 'react-router';
+import logo from '../Image/Logo.png';
 
 export const NavigationBar = () => {
 	const [scrolled, setScrolled] = useState(false);
 	const [user, setUser] = useState(undefined);
 	const navigate = useNavigate();
+	const logoStyle = {
+		width: '50px',
+		height: '50px', 
+		marginLeft: "50px"
+	};
 
 	useEffect(() => {
 		const onScroll = () => {
@@ -49,8 +56,8 @@ export const NavigationBar = () => {
 				className={scrolled ? 'scrolled' : ''}
 			>
 				<Navbar.Brand href="/homepage">
-					<div className="logo">
-						<span className="title">RecipeBank</span>
+					<div>
+						<img src={logo} alt="Logo" style={logoStyle} />
 					</div>
 				</Navbar.Brand>
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -98,3 +105,5 @@ export const NavigationBar = () => {
 		</>
 	);
 };
+
+export default NavigationBar;
