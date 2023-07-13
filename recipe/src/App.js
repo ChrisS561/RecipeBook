@@ -10,12 +10,14 @@ import {
 	useRecoilState,
 	useRecoilValue,
 } from 'recoil';
+import Footer from './Components/Footer';
 
 function App() {
 	return (
 		<RecoilRoot>
 			<NavigationBar />
 			<Banner />
+			<Footer/>
 		</RecoilRoot>
 	);
 }

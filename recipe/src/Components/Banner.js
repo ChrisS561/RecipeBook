@@ -6,6 +6,7 @@ import IngredientsForm from './IngredientsForm';
 import WeatherComponent from '../APIs/Weather';
 import image from "../Image/banner-bg.jpg"
 import RecipeDisplay from '../APIs/RecipeDisplay';
+import Footer from './Footer';
 
 const Banner = () => {
 	return (
@@ -20,7 +21,8 @@ const Banner = () => {
 		>
 			<IngredientsForm />
 			<WeatherComponent />
-			
+			<Footer/>
+
 		</div>
 	);
 };

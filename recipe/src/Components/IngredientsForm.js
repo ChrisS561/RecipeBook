@@ -6,6 +6,7 @@ import RecipeDisplay from '../APIs/RecipeDisplay';
 import { ingredientAtom } from '../atom';
 import { useRecoilState } from 'recoil';
 import axios from 'axios';
+import Footer from './Footer';
 
 /**
  * A form component for managing a list of ingredients.
@@ -13,16 +14,8 @@ import axios from 'axios';
 export default function IngredientsForm() {
 	const [data, setData] = useState([]);
 	const [ingredients, setIngredients] = useRecoilState(ingredientAtom);
-	const [newIngredient, setNewIngredient] = useState('');
-	const [newhidden, setNewHidden] = useState(false);
+	const [ recipes, setRecipes] = useState([]);
 
-	useEffect(() => {
-		if (ingredients.length >= 5) {
-			setNewHidden(true);
-		} else {
-			setNewHidden(false);
-		}
-	}, [ingredients]);
 
 	/**
 	 * Handles the input change event for the new ingredient input field.
@@ -31,7 +24,7 @@ export default function IngredientsForm() {
 	 * @param {Object} event - The input change event.
 	 */
 	const handleInputChange = (event) => {
-		setNewIngredient(event.target.value);
+		setIngredients(event.target.value);
 	};
 
 	/**
@@ -40,34 +33,37 @@ export default function IngredientsForm() {
 	 *
 	 * @param {Object} event - The form submission event.
 	 */
-	const handleSubmit = (event) => {
+	const handleSubmit = async (event) => {
 		event.preventDefault();
-		console.log('Submitting form:', ingredients);
-	};
 
-	/**
-	 * Handles the click event for the "Add" button.
-	 * Adds the new ingredient to the list of ingredients.
-	 * Clears the input field.
-	 */
-	const handleAdd = () => {
-		if (newIngredient !== '') {
-			setIngredients([...ingredients, newIngredient]);
-			setNewIngredient('');
+		try {
+			const response = await axios.get(
+				'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients',
+				{
+					params: {
+						ingredients: ingredients,
+						number: '5',
+						ignorePantry: 'true',
+						ranking: '1',
+					},
+					headers: {
+						'X-RapidAPI-Key':
+							'8ef4a4d156msh28cd50251986f21p1ffe5fjsn5b679b0c6b48',
+						'X-RapidAPI-Host':
+							'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
+					},
+				}
+			);
+
+			setData(response.data);
+			console.log(response.data);
+		} catch (error) {
+			console.error(error);
 		}
 	};
 
-	/**
-	 * Handles the click event for removing an ingredient.
-	 * Removes the ingredient at the specified index from the list of ingredients.
-	 *
-	 * @param {number} index - The index of the ingredient to be removed.
-	 */
-	const handleRemove = (index) => {
-		const updatedIngredients = [...ingredients];
-		updatedIngredients.splice(index, 1);
-		setIngredients(updatedIngredients);
-	};
+
+
 
 	return (
 		<div>
@@ -78,43 +74,14 @@ export default function IngredientsForm() {
 						<p>Enter the ingredients you want to search for:</p>
 						<Form onSubmit={handleSubmit}>
 							<div className="input-container">
-								{ingredients.map((ingredient, index) => (
-									<div key={index} className="ingredient-item">
-										<Form.Control
-											type="text"
-											value={ingredient}
-											name={`ingredient${index}`}
-											placeholder="Enter ingredient..."
-											readOnly
-										/>
-										<Button
-											className="remove-button"
-											size="sm"
-											variant="danger"
-											onClick={() => handleRemove(index)}
-										>
-											Remove
-										</Button>
-									</div>
-								))}
 								<div className="ingredient-item">
 									<Form.Control
 										type="text"
-										value={newIngredient}
+										value={ingredients}
 										name="newIngredient"
 										placeholder="Enter ingredient..."
 										onChange={handleInputChange}
-										hidden={newhidden}
 									/>
-									<Button
-										className="add-button"
-										size="sm"
-										onClick={handleAdd}
-										disabled={newIngredient === ''}
-										hidden={newhidden}
-									>
-										Add
-									</Button>
 								</div>
 								<div className="d-flex justify-content-center ">
 									<Button className="submit-button" size="md" type="submit">
@@ -126,6 +93,7 @@ export default function IngredientsForm() {
 					</div>
 				</Container>
 			</div>
+			<RecipeDisplay data={data} />
 		</div>
 	);
 }

@@ -1,9 +1,33 @@
-.header {
+/* RecipeDisplay.css */
+
+.recipe-cards-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    position:absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    position: absolute;
+    transform: translateY(145%);
+    left:10%
+   
+    
+    /* Center horizontally */
+}
+
+.recipe-card {
+    flex: 0 0 calc(20% - 60px);
+    width: 18rem;
+    margin: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.recipe-card-image {
+    height: 150px;
+    object-fit: cover;
+}
+
+.recipe-card-details {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 14px;
 }
