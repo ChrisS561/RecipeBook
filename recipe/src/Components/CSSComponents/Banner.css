@@ -10,7 +10,7 @@
     width: 100%;
     height: 100%;
     
-    background-image: url('/Users/chris/Desktop/RecipeBook/recipe/src/Image/background3.webp');
+    background-image: url('./background3.webp');
     background-repeat: no-repeat;
     background-size: cover;
     filter: blur(3px);
