@@ -33,13 +33,12 @@ function Login() {
 
 	const googleSignIn = () => { 
 		const provider = new GoogleAuthProvider(); 
-		signInWithPopup(auth,provider)
+		signInWithRedirect(auth,provider)
 	}
 
 	const handleGoogleSignIn = async () => { 
 		try {
 			await googleSignIn()
-			navigate("/homepage")
 		} catch (error) {
 			alert(error.message)
 		}
