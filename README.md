@@ -1,6 +1,6 @@
 # RecipeBook
 
-# Describtion 
+# Description 
 Welcome to my Recipe Search Web Application, a powerful tool crafted with React.js and Firebase authentication, showcasing my skills in developing interactive and practical web applications. It enables users to effortlessly discover recipes based on the ingredients they have at home, while also providing local weather information for added convenience.
 
 In today's fast-paced world, where time is often limited, this application empowers users to embark on culinary adventures without the hassle of planning. Whether you're a seasoned chef or a kitchen novice, this project simplifies the cooking process:
