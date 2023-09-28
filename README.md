@@ -14,7 +14,7 @@ In today's fast-paced world, where time is often limited, this application empow
 
 # Technologies Used:
 
-*`React.js`*: The frontend of the application is built using React.js, providing a smooth and responsive user interface.
+*`React.js`*: The front end of the application is built using React.js, providing a smooth and responsive user interface.
 
 *`Firebase`*: Firebase handles authentication, ensuring user data security.
 
