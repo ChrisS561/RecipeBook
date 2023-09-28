@@ -16,6 +16,7 @@ import { GoogleAuthProvider, FacebookAuthProvider } from 'firebase/auth';
 
 function Login() {
 	const [data, setData] = useState({ username: '', password: '' });
+	const [bypassClicked, setBypassClicked] = useState(false);
 	const { username, password } = data;
 	const navigate = useNavigate();
 
@@ -52,13 +53,18 @@ function Login() {
 	const submitHandler = (event) => {
 		event.preventDefault();
 		signInWithEmailAndPassword(auth, username, password)
-			.then((userCrendential) => {
-				console.log(userCrendential);
+			.then((userCredential) => {
+				console.log(userCredential);
 			})
 			.catch((error) => {
 				alert(error.message);
 			});
 		console.log(data);
+	};
+
+	const handleBypassClick = () => {
+		setData({ ...data, username: "test@test.com", password: "testtest" });
+
 	};
 
 	onAuthStateChanged(auth, (user) => {
@@ -126,7 +132,7 @@ function Login() {
 									type="submit"
 									onClick={submitHandler}
 								>
-									Login
+									Sign in
 								</Button>
 
 								<div className="text-center">
@@ -173,6 +179,15 @@ function Login() {
 											</a>
 										</p>
 									</div>
+									<Button
+										tag="a"
+										variant='success'
+										className="mx-3"
+										onClick={handleBypassClick}
+										style={{ color: 'white' }}
+									>
+										Press to bypass Sign in
+									</Button>
 								</div>
 							</Card.Body>
 						</Card>
